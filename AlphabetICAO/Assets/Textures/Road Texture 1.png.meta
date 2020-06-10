@@ -1,0 +1,552 @@
+fileFormatVersion: 2
+guid: e19eb5095866623418635a65e740e096
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: 4741500563683000998
+    second: Road Texture 1_0
+  - first:
+      213: 2698432673271150380
+    second: Road Texture 1_1
+  - first:
+      213: 4712706442753885372
+    second: Road Texture 1_2
+  - first:
+      213: 1765506937356908900
+    second: Road Texture 1_3
+  - first:
+      213: -1131424096385916778
+    second: Road Texture 1_4
+  - first:
+      213: 4708838579929198177
+    second: Road Texture 1_5
+  - first:
+      213: 7293140577583285591
+    second: Road Texture 1_6
+  - first:
+      213: -5541210141104047372
+    second: Road Texture 1_7
+  - first:
+      213: -7677941759888047048
+    second: Road Texture 1_8
+  - first:
+      213: -1247423751151378737
+    second: Road Texture 1_9
+  - first:
+      213: 6126140118471547016
+    second: Road Texture 1_10
+  - first:
+      213: 2386742825865397820
+    second: Road Texture 1_11
+  - first:
+      213: 6715599784365546666
+    second: Road Texture 1_12
+  - first:
+      213: -2651896307503477160
+    second: Road Texture 1_13
+  - first:
+      213: -6579617398188001124
+    second: Road Texture 1_14
+  - first:
+      213: -2858046508442184057
+    second: Road Texture 1_15
+  - first:
+      213: 957406477346941308
+    second: Road Texture 1_16
+  - first:
+      213: 151955227984835497
+    second: Road Texture 1_17
+  - first:
+      213: 2522921626388754027
+    second: Road Texture 1_18
+  - first:
+      213: -8657152656433533360
+    second: Road Texture 1_19
+  - first:
+      213: 1139127758175792760
+    second: Road Texture 1_20
+  - first:
+      213: -5229034830841674183
+    second: Road Texture 1_21
+  - first:
+      213: -7675905664197540386
+    second: Road Texture 1_22
+  - first:
+      213: -8336887944647360093
+    second: Road Texture 1_23
+  - first:
+      213: -506660291230455808
+    second: Road Texture 1_24
+  - first:
+      213: -2987700623871331802
+    second: Road Texture 1_25
+  - first:
+      213: -1830796808109850975
+    second: Road Texture 1_26
+  - first:
+      213: 9127602556787998627
+    second: Road Texture 1_27
+  - first:
+      213: -1522828750879755061
+    second: Road Texture 1_28
+  - first:
+      213: 5307407021896349454
+    second: Road Texture 1_29
+  - first:
+      213: 505344182408719192
+    second: Road Texture 1_30
+  - first:
+      213: 762158465022097390
+    second: Road Texture 1_31
+  - first:
+      213: 5305571625794702998
+    second: Road Texture 1_32
+  - first:
+      213: -600268079573648955
+    second: Road Texture 1_33
+  - first:
+      213: 915497931810550006
+    second: Road Texture 1_34
+  - first:
+      213: 5826511529250226610
+    second: Road Texture 1_35
+  - first:
+      213: 5450239483729843947
+    second: Road Texture 1_36
+  - first:
+      213: 7253603869615842074
+    second: Road Texture 1_37
+  - first:
+      213: 6980807303019602089
+    second: Road Texture 1_38
+  - first:
+      213: 1164767636433760692
+    second: Road Texture 1_39
+  - first:
+      213: 1823070828288366142
+    second: Road Texture 1_40
+  - first:
+      213: 832892856415078351
+    second: Road Texture 1_41
+  - first:
+      213: 4383215247042488894
+    second: Road Texture 1_42
+  - first:
+      213: 8314643435321328790
+    second: Road Texture 1_43
+  - first:
+      213: -3306678596403569216
+    second: Road Texture 1_44
+  - first:
+      213: 1491043481637611864
+    second: Road Texture 1_45
+  - first:
+      213: 7727175397123571232
+    second: Road Texture 1_46
+  - first:
+      213: 3606868263259746028
+    second: Road Texture 1_47
+  - first:
+      213: 9026317421792562406
+    second: Road Texture 1_48
+  - first:
+      213: 2433200260960586652
+    second: Road Texture 1_49
+  - first:
+      213: -4509495620060656914
+    second: Road Texture 1_50
+  - first:
+      213: 7799108690694748620
+    second: Road Texture 1_51
+  - first:
+      213: -8654881878432971883
+    second: Road Texture 1_52
+  - first:
+      213: -2400503022982294274
+    second: Road Texture 1_53
+  - first:
+      213: 12099851249462037
+    second: Road Texture 1_54
+  - first:
+      213: 584204700428328520
+    second: Road Texture 1_55
+  - first:
+      213: 2536838918911432035
+    second: Road Texture 1_56
+  - first:
+      213: -9067557276301358772
+    second: Road Texture 1_57
+  - first:
+      213: 5475197439145847793
+    second: Road Texture 1_58
+  - first:
+      213: 7479381132095288511
+    second: Road Texture 1_59
+  - first:
+      213: -919824638446557382
+    second: Road Texture 1_60
+  - first:
+      213: 70570891099323664
+    second: Road Texture 1_61
+  - first:
+      213: -1189959798324541247
+    second: Road Texture 1_62
+  - first:
+      213: 8469915573876098799
+    second: Road Texture 1_63
+  - first:
+      213: -2096259610634915266
+    second: Road Texture 1_64
+  - first:
+      213: 6782074011126007098
+    second: Road Texture 1_65
+  - first:
+      213: -5677257666686083340
+    second: Road Texture 1_66
+  - first:
+      213: -5183977825959635610
+    second: Road Texture 1_67
+  - first:
+      213: 8633131951436541423
+    second: Road Texture 1_68
+  - first:
+      213: -7629163415070749292
+    second: Road Texture 1_69
+  - first:
+      213: -5340496002901786712
+    second: Road Texture 1_70
+  - first:
+      213: -2377354243514319574
+    second: Road Texture 1_71
+  - first:
+      213: 5137267689206418923
+    second: Road Texture 1_72
+  - first:
+      213: -9202072397840608517
+    second: Road Texture 1_73
+  - first:
+      213: -7118292965465352334
+    second: Road Texture 1_74
+  - first:
+      213: 52411851162184933
+    second: Road Texture 1_75
+  - first:
+      213: 3384332266443919425
+    second: Road Texture 1_76
+  - first:
+      213: 4016040626533531769
+    second: Road Texture 1_77
+  - first:
+      213: 689551151258580401
+    second: Road Texture 1_78
+  - first:
+      213: -1056475100663944204
+    second: Road Texture 1_79
+  - first:
+      213: -2989078412255733695
+    second: Road Texture 1_80
+  - first:
+      213: 5602153865693575902
+    second: Road Texture 1_81
+  - first:
+      213: -8490028168424317581
+    second: Road Texture 1_82
+  - first:
+      213: 7448166875036295035
+    second: Road Texture 1_83
+  - first:
+      213: -5846490961460971527
+    second: Road Texture 1_84
+  - first:
+      213: -5312014547915651486
+    second: Road Texture 1_85
+  - first:
+      213: -5784216510171069021
+    second: Road Texture 1_86
+  - first:
+      213: -4195197549747574979
+    second: Road Texture 1_87
+  - first:
+      213: -8728980985894710208
+    second: Road Texture 1_88
+  - first:
+      213: -3110451785358530763
+    second: Road Texture 1_89
+  - first:
+      213: 2169272650614774854
+    second: Road Texture 1_90
+  - first:
+      213: 6324199931931678732
+    second: Road Texture 1_91
+  - first:
+      213: 3992313161397018722
+    second: Road Texture 1_92
+  - first:
+      213: -4005445728446434876
+    second: Road Texture 1_93
+  - first:
+      213: 4652084499295613278
+    second: Road Texture 1_94
+  - first:
+      213: -21977554028545609
+    second: Road Texture 1_95
+  - first:
+      213: 1210216743945528853
+    second: Road Texture 1_96
+  - first:
+      213: -6616292969136470284
+    second: Road Texture 1_97
+  - first:
+      213: -7082870203669809516
+    second: Road Texture 1_98
+  - first:
+      213: 1788156416400476300
+    second: Road Texture 1_99
+  - first:
+      213: 3205378195787902732
+    second: Road Texture 1_100
+  - first:
+      213: -5468766592104491276
+    second: Road Texture 1_101
+  - first:
+      213: -4578886619276545667
+    second: Road Texture 1_102
+  - first:
+      213: -5303769820116558806
+    second: Road Texture 1_103
+  - first:
+      213: 4873829458245182480
+    second: Road Texture 1_104
+  - first:
+      213: -4756176473755167
+    second: Road Texture 1_105
+  - first:
+      213: 8926888607145361497
+    second: Road Texture 1_106
+  - first:
+      213: -8576508198211747288
+    second: Road Texture 1_107
+  - first:
+      213: 8839862904971858321
+    second: Road Texture 1_108
+  - first:
+      213: -1703721401155699443
+    second: Road Texture 1_109
+  - first:
+      213: 5787388877390645906
+    second: Road Texture 1_110
+  - first:
+      213: 3915948036712009257
+    second: Road Texture 1_111
+  - first:
+      213: -6258873630599161646
+    second: Road Texture 1_112
+  - first:
+      213: -5039061995390374564
+    second: Road Texture 1_113
+  - first:
+      213: 4680300230442350610
+    second: Road Texture 1_114
+  - first:
+      213: -2706302561657027647
+    second: Road Texture 1_115
+  - first:
+      213: -9003115230573044163
+    second: Road Texture 1_116
+  - first:
+      213: 3499156057166579820
+    second: Road Texture 1_117
+  - first:
+      213: -2832346373077735495
+    second: Road Texture 1_118
+  - first:
+      213: -1651599233942823928
+    second: Road Texture 1_119
+  - first:
+      213: 5978424625230741689
+    second: Road Texture 1_120
+  - first:
+      213: 5828203029584357318
+    second: Road Texture 1_121
+  - first:
+      213: -5673950613976189703
+    second: Road Texture 1_122
+  - first:
+      213: -8485159331416409607
+    second: Road Texture 1_123
+  - first:
+      213: -2397572425127782966
+    second: Road Texture 1_124
+  - first:
+      213: 1119823915128295918
+    second: Road Texture 1_125
+  - first:
+      213: 8348035601544480777
+    second: Road Texture 1_126
+  - first:
+      213: -8451430420761524187
+    second: Road Texture 1_127
+  - first:
+      213: 3800361540289301881
+    second: Road Texture 1_128
+  - first:
+      213: -9043538173414301726
+    second: Road Texture 1_129
+  - first:
+      213: 6669974332983282311
+    second: Road Texture 1_130
+  - first:
+      213: -8151688321595739523
+    second: Road Texture 1_131
+  - first:
+      213: -3220982649815263343
+    second: Road Texture 1_132
+  - first:
+      213: 2689630062356078718
+    second: Road Texture 1_133
+  - first:
+      213: 6900408454807772703
+    second: Road Texture 1_134
+  - first:
+      213: -2961632585849135150
+    second: Road Texture 1_135
+  - first:
+      213: -5890955195077041158
+    second: Road Texture 1_136
+  - first:
+      213: 1854092818698084569
+    second: Road Texture 1_137
+  - first:
+      213: 1611946130826341869
+    second: Road Texture 1_138
+  - first:
+      213: -1674961680015218276
+    second: Road Texture 1_139
+  - first:
+      213: 5956045546292262635
+    second: Road Texture 1_140
+  - first:
+      213: 433214993756213231
+    second: Road Texture 1_141
+  - first:
+      213: 7337060363003235782
+    second: Road Texture 1_142
+  - first:
+      213: -4187719812246139689
+    second: Road Texture 1_143
+  externalObjects: {}
+  serializedVersion: 11
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: -1
+    aniso: -1
+    mipBias: -100
+    wrapU: 1
+    wrapV: 1
+    wrapW: -1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 1
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 200
+  spriteBorder: {x: 86, y: 0, z: 85, w: 0}
+  spriteGenerateFallbackPhysicsShape: 0
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: 0
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  applyGammaDecoding: 1
+  platformSettings:
+  - serializedVersion: 3
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Android
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites: []
+    outline:
+    - - {x: -326, y: 399}
+      - {x: -326, y: -400}
+      - {x: 326, y: -400}
+      - {x: 326, y: 400}
+    physicsShape: []
+    bones: []
+    spriteID: 5e97eb03825dee720800000000000000
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+  spritePackingTag: 
+  pSDRemoveMatte: 0
+  pSDShowRemoveMatteOption: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
