@@ -22,17 +22,20 @@ public class GameController : Singleton<GameController>
 
     [Header("Events")]
     public UnityEvent WinEvent;
+    public UnityEvent LoseEvent;
     private void Start()
     {        
         Field.CreateField();       
         planeFactory = FactoryProducer.GetFactory(FactoryProductType.Planes);
         InitPlane();
+
+        WinEvent.AddListener(() => SpawnConfetti());
     }
 
     public void InitPlane()
     {
         Vector3 _planeSpawn = Field.PickRandomSpotToSpawn();
-        CreatePathForPlane(_planeSpawn, Field.center, Field.Destination);        
+        CreatePathForPlane(_planeSpawn, Field.center, Field.StartingDestination);        
         plane = planeFactory.GetProduct((int)PlaneTypes.TwoLettersPlane, _planeSpawn, pathPlane.path);
 
         HUDControl.Instance.AskPlayer();
@@ -48,10 +51,6 @@ public class GameController : Singleton<GameController>
         pathPlane.CreatePath(_plane);
     }
 
-    private void Update()
-    {
-    }
-
     public void SetUpWords(int amount)
     {
         chosenWords = ICAO.ReturnRandomWordsFromAlphabet(amount);
@@ -64,5 +63,17 @@ public class GameController : Singleton<GameController>
         pathPlane.path.TriggerPathUpdate();
     }
 
+    void SpawnConfetti()
+    {
+        GameObject _confetti = Resources.Load("Prefabs/Confetti") as GameObject;
+        foreach (Vector3 _pos in Field.ReturnCornersOfField(2))
+        {
+            ParticleSystem _conf = Instantiate(_confetti).GetComponent<ParticleSystem>(); ;
+            _conf.transform.position = _pos;
 
+            Vector3 _dir = (Field.center - _pos).normalized;
+            Quaternion _targetRot = Quaternion.LookRotation(_dir);
+            _conf.transform.rotation = Quaternion.Slerp(_conf.transform.rotation, _targetRot, 10);
+        }
+    }
 }

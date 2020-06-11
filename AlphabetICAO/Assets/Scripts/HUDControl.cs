@@ -29,7 +29,6 @@ public class HUDControl : Singleton<HUDControl> {
     {
         inputPanel.CreateAndSetInputFields();
     }
-
     //IEnumerator ShowVerdict(GameObject text)
     //{
     //    text.SetActive(true);

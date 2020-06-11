@@ -18,7 +18,7 @@ public class InputFieldWords : MonoBehaviour
         {
             //GameObject _loadField = Resources.Load("Prefabs/InputText") as GameObject;
             TMP_InputField _inputField = Instantiate(inputTextPrefab);
-            _inputField.transform.parent = this.transform;
+            _inputField.transform.SetParent(this.transform);
             _inputField.text = Utility.ReplaceStringWithUnderlines(word);
             createdInputFields.Add(_inputField);
             //_inputField.onValueChanged.AddListener(delegate { ReplaceBackSlashes(_inputField); });

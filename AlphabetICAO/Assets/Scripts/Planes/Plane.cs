@@ -17,7 +17,7 @@ public abstract class Plane : MonoBehaviour, IPlaneCommunicator
     protected float speed;
     public float Speed => speed;
 
-    public Vector3 LetterPosition { get => transform.localPosition + (Vector3.up * 2); /** transform.localScale.y / 2*/ }
+    public Vector3 LetterPosition { get => transform.localPosition + (Vector3.up * 1.5f); /** transform.localScale.y / 2*/ }
 
     private void Awake()
     {
@@ -27,7 +27,8 @@ public abstract class Plane : MonoBehaviour, IPlaneCommunicator
         LettersText = GetComponentInChildren<TMP_Text>();
         pathFollower = GetComponent<PathFollower>();
         Init();
-        GameController.Instance.WinEvent.AddListener(() => WinGame());
+        GameController.Instance.LoseEvent.AddListener(() => EndGame());
+        GameController.Instance.WinEvent.AddListener(() => EndGame());
     }
 
     public abstract void Init();
@@ -46,10 +47,11 @@ public abstract class Plane : MonoBehaviour, IPlaneCommunicator
         }
     }
 
-    protected void WinGame()
+    protected void EndGame()
     {
         Destroy(gameObject);
-        GameController.Instance.WinEvent.RemoveListener(() => WinGame());
+        GameController.Instance.LoseEvent.RemoveListener(() => EndGame());
+        GameController.Instance.WinEvent.RemoveListener(() => EndGame());
     }
     
     //public IEnumerator Move()
