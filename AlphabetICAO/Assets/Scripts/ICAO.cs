@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class ICAO {
-    public static Dictionary<string, string> alphabet = new Dictionary<string, string>
+    public static Dictionary<string, string> Alphabet = new Dictionary<string, string>
         {
         {"A", "Alpha" },
         {"B", "Bravo" },
@@ -38,12 +38,16 @@ public class ICAO {
     {
         get
         {
-            foreach (KeyValuePair<string, string> pair in alphabet)
-            {
-                if (letter.ToUpper().Equals(pair.Key))
-                    return pair.Value;
-            }
-            return null;
+            if (Alphabet[letter.ToUpper()] != null)
+                return (Alphabet[letter]);
+            else
+                return null;
+            //foreach (KeyValuePair<string, string> pair in Alphabet)
+            //{
+            //    if (letter.ToUpper().Equals(pair.Key))
+            //        return pair.Value;
+            //}
+            //return null;
         }
     }
 
@@ -51,12 +55,13 @@ public class ICAO {
     {
         Dictionary<string, string> _returningWords = new Dictionary<string,string>();
         int _seed = Random.Range(0, int.MaxValue);
-        Queue<string> _shuffledLetters = new Queue<string>(Utility.ShuffleArray(alphabet.Keys.ToArray(), _seed));
+        Queue<string> _shuffledLetters = new Queue<string>(Utility.ShuffleArray(Alphabet.Keys.ToArray(), _seed));
         for (int i = 0; i < amountOfWords; i++)
         {
             string _randomLetter = _shuffledLetters.Dequeue();
             _shuffledLetters.Enqueue(_randomLetter);
-            _returningWords.Add(_randomLetter, alphabet[_randomLetter]);
+            _returningWords.Add(_randomLetter, Alphabet[_randomLetter]);
+           
         }
         return _returningWords;
         

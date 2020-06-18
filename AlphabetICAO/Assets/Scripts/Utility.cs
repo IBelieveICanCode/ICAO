@@ -59,8 +59,8 @@ public class Utility
 
     public static Vector3 RandomizePoint(Vector3 pos)
     {
-        Vector3 _rightSide = pos + (Vector3.right * Random.Range(3, 6));
-        Vector3 _leftside = pos + (Vector3.left * Random.Range(3, 6));
+        Vector3 _rightSide = pos + (Vector3.right * Random.Range(4, 6));
+        Vector3 _leftside = pos + (Vector3.left * Random.Range(4, 6));
         return PickRandomPos(new Vector3[2] { _rightSide, _leftside });
 
     }

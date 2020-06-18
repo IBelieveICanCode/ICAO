@@ -6,7 +6,9 @@ public class TwoLetterPlane : Plane
 {
     public override void Init()
     {
+        GameController.Instance.SetUpWords(2);
         speed = 2f;
         ChooseLettersForText();
+        
     }
 }

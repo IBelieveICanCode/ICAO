@@ -21,14 +21,14 @@ public abstract class Plane : MonoBehaviour, IPlaneCommunicator
 
     private void Awake()
     {
-    }
-    private void Start()
-    {
         LettersText = GetComponentInChildren<TMP_Text>();
         pathFollower = GetComponent<PathFollower>();
         Init();
-        GameController.Instance.LoseEvent.AddListener(() => EndGame());
-        GameController.Instance.WinEvent.AddListener(() => EndGame());
+    }
+    private void Start()
+    {        
+        GameController.Instance.WrongEvent.AddListener(() => EndGame());
+        GameController.Instance.CorrectEvent.AddListener(() => EndGame());
     }
 
     public abstract void Init();
@@ -48,10 +48,10 @@ public abstract class Plane : MonoBehaviour, IPlaneCommunicator
     }
 
     protected void EndGame()
-    {
+    {   
         Destroy(gameObject);
-        GameController.Instance.LoseEvent.RemoveListener(() => EndGame());
-        GameController.Instance.WinEvent.RemoveListener(() => EndGame());
+        GameController.Instance.WrongEvent.RemoveListener(() => EndGame());
+        GameController.Instance.CorrectEvent.RemoveListener(() => EndGame());
     }
     
     //public IEnumerator Move()

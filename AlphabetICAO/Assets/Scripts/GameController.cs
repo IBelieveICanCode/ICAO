@@ -1,9 +1,9 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 using FactorySpace;
-using System;
 
 public class GameController : Singleton<GameController>
 {
@@ -21,25 +21,29 @@ public class GameController : Singleton<GameController>
     private IPlaneCommunicator plane;
 
     [Header("Events")]
-    public UnityEvent WinEvent;
-    public UnityEvent LoseEvent;
+    public UnityEvent CorrectEvent;
+    public UnityEvent WrongEvent;
+    public UnityEvent DefeatEvent;
     private void Start()
     {        
         Field.CreateField();       
         planeFactory = FactoryProducer.GetFactory(FactoryProductType.Planes);
         InitPlane();
 
-        WinEvent.AddListener(() => SpawnConfetti());
+        WrongEvent.AddListener(() => HUDControl.Instance.DiscardHealth());
+        CorrectEvent.AddListener(() => HUDControl.Instance.AddHealth());
+
+        int[] array = new int[] { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9 };
     }
+
 
     public void InitPlane()
     {
         Vector3 _planeSpawn = Field.PickRandomSpotToSpawn();
         CreatePathForPlane(_planeSpawn, Field.center, Field.StartingDestination);        
         plane = planeFactory.GetProduct((int)PlaneTypes.TwoLettersPlane, _planeSpawn, pathPlane.path);
-
-        HUDControl.Instance.AskPlayer();
     }
+
     private void CreatePathForPlane(Vector3 startingPoint, Vector3 secondPoint, Vector3 endPoint)
     {
         Vector3[] _plane = new Vector3[3]
@@ -56,10 +60,10 @@ public class GameController : Singleton<GameController>
         chosenWords = ICAO.ReturnRandomWordsFromAlphabet(amount);
     }
 
-    public void PathUpdate()
+    public void PathCorrectUpdate()
     {
-        Vector3 _side = Field.FinishPoint();
-        CreatePathForPlane(plane.Position, _side, _side);
+        Vector3 _finishPos = Field.FinishPointPos();
+        CreatePathForPlane(plane.Position, _finishPos, _finishPos);
         pathPlane.path.TriggerPathUpdate();
     }
 
@@ -70,7 +74,6 @@ public class GameController : Singleton<GameController>
         {
             ParticleSystem _conf = Instantiate(_confetti).GetComponent<ParticleSystem>(); ;
             _conf.transform.position = _pos;
-
             Vector3 _dir = (Field.center - _pos).normalized;
             Quaternion _targetRot = Quaternion.LookRotation(_dir);
             _conf.transform.rotation = Quaternion.Slerp(_conf.transform.rotation, _targetRot, 10);

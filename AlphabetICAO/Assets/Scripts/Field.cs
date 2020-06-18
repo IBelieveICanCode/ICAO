@@ -1,6 +1,8 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UniRx;
+using UniRx.Triggers;
 
 public class Field : MonoBehaviour
 {
@@ -26,7 +28,6 @@ public class Field : MonoBehaviour
 
     private void Awake()
     {
-        //bezier = GetComponent<BezierSpline>();
     }
     public void CreateField()
     {
@@ -52,6 +53,10 @@ public class Field : MonoBehaviour
         _col.offset = finishPos + offset;
         _col.size = new Vector3((rightDownPoint - leftDownPoint).magnitude, 1) ;
         _col.isTrigger = true;
+
+        this.OnTriggerEnter2DAsObservable()
+           .Where(collision => collision.gameObject.GetComponent<IPlaneCommunicator>() != null)
+           .Subscribe(collision => GameController.Instance.WrongEvent?.Invoke());
     }
 
     private void SetSidesOfMesh()
@@ -81,17 +86,10 @@ public class Field : MonoBehaviour
         return Utility.PickRandomPos(sidesToSpawnPlane);
     }
 
-    public Vector3 FinishPoint()
+    public Vector3 FinishPointPos()
     {
         Vector3 _center = new Vector3((leftDownPoint.x + rightDownPoint.x) / 2, (leftDownPoint.y + rightDownPoint.y) / 2);
         return _center;
-    }
-
-    private void OnTriggerEnter2D(Collider2D collision)
-    {
-        if (collision.GetComponent<IPlaneCommunicator>() != null)
-            GameController.Instance.LoseEvent?.Invoke();
-
     }
 
     public Vector3[] ReturnCornersOfField(int amount)

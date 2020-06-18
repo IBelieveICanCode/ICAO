@@ -23,17 +23,17 @@ namespace FactorySpace
             switch (planeType)
             {
                 case (int)PlaneTypes.OneLetterPlane:
-                    _plane = _newPlane.AddComponent(typeof(OneLetterPlane)) as Plane;
-                    GameController.Instance.SetUpWords(1);
+                    _plane = _newPlane.AddComponent(typeof(OneLetterPlane)) as Plane;                 
                     break;
                 case (int)PlaneTypes.TwoLettersPlane:
-                    _plane = _newPlane.AddComponent(typeof(TwoLetterPlane)) as Plane;
-                    GameController.Instance.SetUpWords(2);
+                    _plane = _newPlane.AddComponent(typeof(TwoLetterPlane)) as Plane;                    
                     break;
                 default:
                     return null;
             }
+            HUDControl.Instance.AskPlayer();
             return _plane.GetComponent<IPlaneCommunicator>();
+
         }
     }
 
