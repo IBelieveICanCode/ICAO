@@ -5,8 +5,14 @@ using UnityEngine;
 using UnityEngine.Events;
 using FactorySpace;
 
+public delegate void LevelProgressHandler(LevelProgress progress);
+
 public class GameController : Singleton<GameController>
 {
+    public event LevelProgressHandler ProgressEvent;
+    LevelProgress lvlProgress;
+    int roundCount;
+
     Dictionary<string,string> chosenWords;
     public Dictionary<string, string> ChosenWords => chosenWords;
     private ICAO ICAO;
@@ -25,15 +31,17 @@ public class GameController : Singleton<GameController>
     public UnityEvent WrongEvent;
     public UnityEvent DefeatEvent;
     private void Start()
-    {        
+    {
+        lvlProgress = new LevelProgress();
+        lvlProgress.Rounds = 1;
         Field.CreateField();       
         planeFactory = FactoryProducer.GetFactory(FactoryProductType.Planes);
         InitPlane();
 
         WrongEvent.AddListener(() => HUDControl.Instance.DiscardHealth());
         CorrectEvent.AddListener(() => HUDControl.Instance.AddHealth());
-
-        int[] array = new int[] { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9 };
+        CorrectEvent.AddListener(() => ProgressEvent(lvlProgress));
+        CorrectEvent.AddListener(() => lvlProgress.Rounds++);
     }
 
 
@@ -41,7 +49,7 @@ public class GameController : Singleton<GameController>
     {
         Vector3 _planeSpawn = Field.PickRandomSpotToSpawn();
         CreatePathForPlane(_planeSpawn, Field.center, Field.StartingDestination);        
-        plane = planeFactory.GetProduct((int)PlaneTypes.TwoLettersPlane, _planeSpawn, pathPlane.path);
+        plane = planeFactory.GetProduct((int)lvlProgress.PlaneTypes, _planeSpawn, pathPlane.path);
     }
 
     private void CreatePathForPlane(Vector3 startingPoint, Vector3 secondPoint, Vector3 endPoint)

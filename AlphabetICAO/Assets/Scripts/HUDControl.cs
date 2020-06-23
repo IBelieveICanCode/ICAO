@@ -3,13 +3,21 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
 
 public class HUDControl : Singleton<HUDControl> {
+    
     InputFieldWords inputPanel;
+    [SerializeField]
+    TMP_Text roundCount;
 
     void Awake()
     {
         inputPanel = gameObject.GetComponentInChildren<InputFieldWords>();
+    }
+    private void Start()
+    {
+        GameController.Instance.ProgressEvent += UpdateRounds;
     }
 
     public void Exit()
@@ -36,6 +44,11 @@ public class HUDControl : Singleton<HUDControl> {
     public void AddHealth()
     {
         HeartsHealthVisual.heartsHealthSystemStatic.Heal(1);
+    }
+
+    private void UpdateRounds(LevelProgress lvlProgress)
+    {
+        roundCount.text = lvlProgress.Rounds.ToString().ToUpper();
     }
     //IEnumerator ShowVerdict(GameObject text)
     //{
