@@ -28,8 +28,8 @@ public class HeartsHealthSystem {
     public HeartsHealthSystem(int heartAmount) {
         heartList = new List<Heart>();
         for (int i = 0; i < heartAmount; i++) {
-            Heart heart = new Heart(MAX_FRAGMENT_AMOUNT);
-            heartList.Add(heart);
+            Heart _heart = new Heart(MAX_FRAGMENT_AMOUNT);
+            heartList.Add(_heart);
         }
     }
 
@@ -40,15 +40,15 @@ public class HeartsHealthSystem {
     public void Damage(int damageAmount) {
         // Cycle through all hearts starting from the end
         for (int i = heartList.Count - 1; i >= 0; i--) {
-            Heart heart = heartList[i];
+            Heart _heart = heartList[i];
             // Test if this heart can absorb damageAmount
-            if (damageAmount > heart.GetFragmentAmount()) {
+            if (damageAmount > _heart.GetFragmentAmount()) {
                 // Heart cannot absorb full damageAmount, damage heart and keep going to next heart
-                damageAmount -= heart.GetFragmentAmount();
-                heart.Damage(heart.GetFragmentAmount());
+                damageAmount -= _heart.GetFragmentAmount();
+                _heart.Damage(_heart.GetFragmentAmount());
             } else {
                 // Heart can absorb full damage amount, absorb and break out of the cycle
-                heart.Damage(damageAmount);
+                _heart.Damage(damageAmount);
                 break;
             }
         }
@@ -60,9 +60,10 @@ public class HeartsHealthSystem {
         }
     }
 
-    public void Heal(int healAmount) {
-        for (int i = 0; i < heartList.Count; i++) {
-            Heart heart = heartList[i];
+    public void Heal(int healAmount)
+    {
+        foreach (var heart in heartList)
+        {
             int missingFragments = MAX_FRAGMENT_AMOUNT - heart.GetFragmentAmount();
             if (healAmount > missingFragments) {
                 healAmount -= missingFragments;
@@ -72,10 +73,11 @@ public class HeartsHealthSystem {
                 break;
             }
         }
+
         if (OnHealed != null) OnHealed(this, EventArgs.Empty);
     }
 
-    public bool IsDead() {
+    private bool IsDead() {
         return heartList[0].GetFragmentAmount() == 0;
     }
 

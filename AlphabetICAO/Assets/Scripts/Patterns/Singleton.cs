@@ -3,34 +3,34 @@ using System.Collections;
 
 public abstract class Singleton<T> : MonoBehaviour where T : MonoBehaviour
 {
-    private static T _instance = null;
+    private static T instance = null;
     public static T Instance
     {
         get
         {
-            if (_instance == null)
+            if (instance == null)
             {
-                _instance = (T)FindObjectOfType(typeof(T));
-                if (_instance == null)
+                instance = (T)FindObjectOfType(typeof(T));
+                if (instance == null)
                 {
 
-                    string goName = typeof(T).ToString();
+                    var _goName = typeof(T).ToString();
 
-                    GameObject go = GameObject.Find(goName);
+                    var go = GameObject.Find(_goName);
                     if (go == null)
                     {
                         go = new GameObject();
-                        go.name = goName;
+                        go.name = _goName;
                     }
-                    _instance = go.AddComponent<T>();
+                    instance = go.AddComponent<T>();
                 }
             }
-            return _instance;
+            return instance;
         }
     }
     public virtual void OnApplicationQuit()
     {
         // release reference on exit
-        _instance = null;
+        instance = null;
     }
 }

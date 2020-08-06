@@ -1,47 +1,51 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using Adminka;
 using UnityEngine;
 using PathCreation;
 using PathCreation.Follower;
+using UnityEditor;
+
 
 namespace FactorySpace
 {
     public abstract class Factory
     {
-        public abstract IPlaneCommunicator GetProduct(int _Type, Vector3 _spawnPos, PathCreator path);
+        public abstract IPlaneCommunicator GetProduct(int type, Vector3 spawnPos, PathCreator path);
     }
 
     public class PlaneFactory : Factory
     {
-        public override IPlaneCommunicator GetProduct(int planeType, Vector3 _spawnPos, PathCreator path)
+        public override IPlaneCommunicator GetProduct(int planeType, Vector3 spawnPos, PathCreator path)
         {
-            GameObject _planeSpawned = Resources.Load("Prefabs/Plane") as GameObject;
+            PlaneSO _planeSpawned =  Resources.Load("ScriptableObject/Plane") as PlaneSO;
+            Plane _plane = Object.Instantiate(_planeSpawned.Plane);
+            _plane.SetPosition(spawnPos);
+            _plane.PathFollower.pathCreator = path;
 
-            GameObject _newPlane = MonoBehaviour.Instantiate(_planeSpawned, _spawnPos, Quaternion.identity);
-            _newPlane.GetComponent<PathFollower>().pathCreator = path;
-            Plane _plane;
             switch (planeType)
             {
                 case (int)PlaneTypes.OneLetterPlane:
-                    _plane = _newPlane.AddComponent(typeof(OneLetterPlane)) as Plane;                 
+                    _plane.WordsAmount = 1;
                     break;
                 case (int)PlaneTypes.TwoLettersPlane:
-                    _plane = _newPlane.AddComponent(typeof(TwoLetterPlane)) as Plane;                    
+                    _plane.WordsAmount = 2;
+                    break;
+                case (int)PlaneTypes.ThreeLettersPlane:
+                    _plane.WordsAmount = 3;
                     break;
                 default:
                     return null;
             }
-            HUDControl.Instance.AskPlayer();
-            return _plane.GetComponent<IPlaneCommunicator>();
-
+            return _plane;//.GetComponent<IPlaneCommunicator>();
         }
     }
 
-    public class FactoryProducer
+    public static class FactoryProducer
     {
-        public static Factory GetFactory(FactoryProductType _type)
+        public static Factory GetFactory(FactoryProductType type)
         {
-            switch (_type)
+            switch (type)
             {
                 case FactoryProductType.Planes:
                     return new PlaneFactory();
@@ -52,7 +56,7 @@ namespace FactorySpace
     }
     public enum PlaneTypes
     {
-        OneLetterPlane, TwoLettersPlane
+        OneLetterPlane, TwoLettersPlane, ThreeLettersPlane
     }
 
     public enum FactoryProductType

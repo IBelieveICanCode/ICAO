@@ -1,79 +1,74 @@
-﻿using System.Collections;
-using UnityEngine;
+﻿using Adminka;
 using PathCreation.Follower;
 using TMPro;
+using UnityEngine;
 
-[RequireComponent(typeof(Rigidbody2D))]
-public abstract class Plane : MonoBehaviour, IPlaneCommunicator
-{
-    [SerializeField]
-    protected TMP_Text LettersText;
-    Rigidbody2D rb;
-    protected PathFollower pathFollower;
-
-    public Vector3 Position => transform.position;
-
-    [SerializeField]
-    protected float speed;
-    public float Speed => speed;
-
-    public Vector3 LetterPosition { get => transform.localPosition + (Vector3.up * 1.5f); /** transform.localScale.y / 2*/ }
-
-    private void Awake()
+    [RequireComponent(typeof(Rigidbody2D))]
+    public class Plane : MonoBehaviour, IPlaneCommunicator
     {
-        LettersText = GetComponentInChildren<TMP_Text>();
-        pathFollower = GetComponent<PathFollower>();
-        Init();
-    }
-    private void Start()
-    {        
-        GameController.Instance.WrongEvent.AddListener(() => EndGame());
-        GameController.Instance.CorrectEvent.AddListener(() => EndGame());
-    }
+        public int WordsAmount;
+        [SerializeField]
+        protected TMP_Text lettersText;
 
-    public abstract void Init();
+        [SerializeField]
+        private PathFollower pathFollower;
 
-    private void Update()
-    {
-        pathFollower.FollowPath(speed);
-    }
+        public PathFollower PathFollower => pathFollower;
 
-    public void ChooseLettersForText()
-    {
-        LettersText.text = null;
-        foreach (string _letter in GameController.Instance.ChosenWords.Keys)
+        public Vector3 Position => transform.position;
+
+        [SerializeField]
+        protected float speed;
+        public float Speed => speed;
+
+        public Vector3 LetterPosition => transform.localPosition + (Vector3.up * 1.5f);
+
+        private void Awake()
         {
-            LettersText.text += _letter + "  ";
+            Init();
+        }
+        private void Start()
+        {
+            GameController.Instance.WrongEvent.AddListener(EndGame);
+            GameController.Instance.CorrectEvent.AddListener(EndGame);
+            speed = GameController.Instance.LvlProgress.Speed;
+        }
+
+        protected virtual void Init()
+        {
+            GameController.Instance.SetUpWords(WordsAmount);
+            ChooseLettersForText();     
+        }
+
+        private void Update()
+        {
+            PathFollower.FollowPath(speed);
+        }
+
+        protected void ChooseLettersForText()
+        {
+            lettersText.text = null;
+            foreach (string _letter in GameController.Instance.ChosenWords.Keys)
+            {
+                lettersText.text += _letter + "  ";
+            }
+        }
+
+        public void SetPosition(Vector3 pos)
+        {
+            transform.position = pos;
+        }
+        
+        protected void EndGame()
+        {   
+            Destroy(gameObject);
+            GameController.Instance.WrongEvent.RemoveListener(() => EndGame());
+            GameController.Instance.CorrectEvent.RemoveListener(() => EndGame());
+        }
+
+        void IPlaneCommunicator.Accelerate()
+        {
+            speed = 5f;
         }
     }
 
-    protected void EndGame()
-    {   
-        Destroy(gameObject);
-        GameController.Instance.WrongEvent.RemoveListener(() => EndGame());
-        GameController.Instance.CorrectEvent.RemoveListener(() => EndGame());
-    }
-    
-    //public IEnumerator Move()
-    //{
-    //    while (t <= 1)
-    //    {
-    //        t += Time.deltaTime * 0.05f;
-    //        planePos = Bezier.QuardaticBezierPoint(t, spawnPos, center, finishPoint);
-    //        rb.MovePosition(planePos);
-
-    //        float origt = t - (Time.deltaTime * 0.01f);
-    //        origPos = Bezier.QuardaticBezierPoint(origt, spawnPos, center, finishPoint);
-    //        float deltaX = origPos.x - rb.transform.position.x;
-    //        float deltaY = origPos.y - rb.transform.position.y;
-    //        float degree = Mathf.Atan2(deltaY, deltaX);
-    //        float angle = (degree * 180 / 3.14f) - 90;
-    //        if (angle < 0)
-    //        {
-    //            angle = 360 + angle;
-    //        }
-    //        rb.MoveRotation(angle);
-    //        yield return new WaitForEndOfFrame();            
-    //    }
-    //}
-}

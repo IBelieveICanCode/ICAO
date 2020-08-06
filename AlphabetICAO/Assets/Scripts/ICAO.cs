@@ -1,10 +1,12 @@
 ﻿using System.Linq;
 using System.Collections;
 using System.Collections.Generic;
+using Adminka;
 using UnityEngine;
+using UtilityScripts;
 
 public class ICAO {
-    public static Dictionary<string, string> Alphabet = new Dictionary<string, string>
+    private static readonly Dictionary<string, string> Alphabet = new Dictionary<string, string>
         {
         {"A", "Alpha" },
         {"B", "Bravo" },
@@ -34,23 +36,14 @@ public class ICAO {
         {"Z", "Zulu" }
     };
 
-    public string this[string letter]
-    {
-        get
-        {
-            if (Alphabet[letter.ToUpper()] != null)
-                return (Alphabet[letter]);
-            else
-                return null;
-            //foreach (KeyValuePair<string, string> pair in Alphabet)
-            //{
-            //    if (letter.ToUpper().Equals(pair.Key))
-            //        return pair.Value;
-            //}
-            //return null;
-        }
-    }
+    public string this[string letter] => Alphabet[letter.ToUpper()] != null ? Alphabet[letter] : null;
 
+    //foreach (KeyValuePair<string, string> pair in Alphabet)
+    //{
+    //    if (letter.ToUpper().Equals(pair.Key))
+    //        return pair.Value;
+    //}
+    //return null;
     public static Dictionary<string, string> ReturnRandomWordsFromAlphabet(int amountOfWords)
     {
         Dictionary<string, string> _returningWords = new Dictionary<string,string>();
@@ -64,7 +57,7 @@ public class ICAO {
            
         }
         return _returningWords;
-        
-
     }
+    
+
 }

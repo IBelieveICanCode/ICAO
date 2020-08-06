@@ -1,15 +1,16 @@
-﻿using System.Linq;
-using System.Collections;
-using System.Collections.Generic;
+﻿using Adminka;
 using UnityEngine;
 using UnityEngine.UI;
+using UtilityScripts;
 using TMPro;
+using DG.Tweening;
 
 public class HUDControl : Singleton<HUDControl> {
-    
-    InputFieldWords inputPanel;
-    [SerializeField]
-    TMP_Text roundCount;
+
+    [SerializeField] private Image fadeImage;
+    private InputFieldWords inputPanel;
+    [SerializeField] private TMP_Text roundCount;
+    [SerializeField] private RectTransform setUpWordsPanel;
 
     void Awake()
     {
@@ -28,9 +29,16 @@ public class HUDControl : Singleton<HUDControl> {
     public void SubmitButton()
     {
         if (inputPanel.CheckCorrectAnswers())
-            GameController.Instance.PathCorrectUpdate();       
+            GameController.Instance.AnswerCorrectUpdatePath();
+        else
+            GameController.Instance.AnswerNotCorrect();
     }
 
+    public void Defeat()
+    {
+        fadeImage.gameObject.SetActive(true);
+        StartCoroutine(Utility.Fade(3, fadeImage));
+    }
     //answerInput.text.ToLower().Equals(ICAO.alphabet[letter].ToLower())
     public void AskPlayer()
     {
@@ -46,14 +54,19 @@ public class HUDControl : Singleton<HUDControl> {
         HeartsHealthVisual.heartsHealthSystemStatic.Heal(1);
     }
 
+    public void ShowWordsPanel()
+    {
+        setUpWordsPanel.DOAnchorPos(Vector2.zero, 0.25f);
+    }
+
+    public void HideWordsPanel()
+    {
+        print(setUpWordsPanel.rect.height);
+        setUpWordsPanel.DOAnchorPos(new Vector2(0, -setUpWordsPanel.rect.height), 0.25f);
+    }
     private void UpdateRounds(LevelProgress lvlProgress)
     {
         roundCount.text = lvlProgress.Rounds.ToString().ToUpper();
     }
-    //IEnumerator ShowVerdict(GameObject text)
-    //{
-    //    text.SetActive(true);
-    //    yield return new WaitForSeconds(0.5f);
-    //    text.SetActive(false);
-    //}
+
 }

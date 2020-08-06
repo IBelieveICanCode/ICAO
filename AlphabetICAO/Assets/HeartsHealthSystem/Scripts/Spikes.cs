@@ -9,7 +9,7 @@
                unitycodemonkey.com
     --------------------------------------------------
  */
-
+using System.Text;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -26,4 +26,5 @@ public class Spikes : MonoBehaviour
     //        player.DamageKnockback(knockbackDir, 5f, damageAmount);
     //    }
     //}
+
 }

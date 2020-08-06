@@ -1,47 +1,47 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using FactorySpace;
 
 [System.Serializable]
 public class LevelProgress 
 {
-    int rounds;
-    int scores;
-    FactorySpace.PlaneTypes planeTypes;
-    int speed;
+    #region Fields
+    private int rounds;
 
-    public int Scores => scores;
-    public FactorySpace.PlaneTypes PlaneTypes => planeTypes;
-    public int Speed => speed;
+    #endregion
+    #region Properties
+    public int Scores { get; private set; }
+
+    public PlaneTypes PlaneTypes { get; private set; }
+
+    public int Speed { get; private set; }
 
     public int Rounds
     {
-        get
-        {
-            return rounds;
-        }
+        get => rounds;
         set
         {
             rounds = value;
             DifficultyUp(rounds);
         }
     }
-    public void DifficultyUp(int crntRound)
+    #endregion
+    public void DifficultyUp(int currentRound)
     {
-        //Debug.Log(crntRound);
-        int _difficultIncrStep = crntRound / 3;
-        scores = _difficultIncrStep * 5;
+        int _difficultIncrStep = currentRound / 3;
+        Scores = _difficultIncrStep * 5;
 
-        if (crntRound % 3 == 0 || _difficultIncrStep >= 3)
-            speed = 3;
+        if (currentRound % 3 == 0 || _difficultIncrStep >= 3)
+            Speed = 3;
         else
-            speed = crntRound % 3;
-
-        Debug.Log(_difficultIncrStep);
-        if (_difficultIncrStep < 2)
-            planeTypes = FactorySpace.PlaneTypes.OneLetterPlane;
-        else if (_difficultIncrStep >= 2 && _difficultIncrStep < 4)
-            planeTypes = FactorySpace.PlaneTypes.TwoLettersPlane;
+            Speed = currentRound % 3;
+        if (_difficultIncrStep < 1)
+            PlaneTypes = PlaneTypes.OneLetterPlane;
+        else if (_difficultIncrStep >= 1 && _difficultIncrStep < 3)
+            PlaneTypes = PlaneTypes.TwoLettersPlane;
+        else
+            PlaneTypes = PlaneTypes.ThreeLettersPlane;
 
     }
 

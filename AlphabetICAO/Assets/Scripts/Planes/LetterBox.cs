@@ -19,12 +19,12 @@ public class LetterBox : MonoBehaviour
         RotateToCamera();
     }
 
-    void MoveWithPlane()
+    private void MoveWithPlane()
     {
         transform.position = parentPlane.LetterPosition;
     }
 
-    void RotateToCamera()
+    private void RotateToCamera()
     {
         var _newRotation = Quaternion.LookRotation(Camera.main.transform.position) * Quaternion.Euler(180, 0, -180);
         transform.rotation = Quaternion.Slerp(transform.rotation, _newRotation, 10f);

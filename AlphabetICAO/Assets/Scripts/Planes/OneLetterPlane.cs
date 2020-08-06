@@ -1,13 +1,13 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using Adminka;
 using UnityEngine;
 
 public class OneLetterPlane : Plane
 {
-    public override void Init()
+    protected override void Init()
     {
         GameController.Instance.SetUpWords(1);
-        speed = 1f;
         ChooseLettersForText();        
     }
 }
