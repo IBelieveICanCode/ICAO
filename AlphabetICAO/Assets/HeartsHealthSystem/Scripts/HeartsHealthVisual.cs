@@ -16,6 +16,7 @@ using Adminka;
 using UnityEngine;
 using UniRx;
 using UnityEngine.UI;
+using Zenject;
 
 public class HeartsHealthVisual : MonoBehaviour {
 
@@ -30,6 +31,9 @@ public class HeartsHealthVisual : MonoBehaviour {
     private bool isHealing;
 
     private IDisposable _update;
+
+    [Inject]
+    GameController gameController;
 
     private void Awake() {
         heartImageList = new List<HeartImage>();
@@ -69,7 +73,7 @@ public class HeartsHealthVisual : MonoBehaviour {
     }
 
     private void HeartsHealthSystem_OnDead(object sender, System.EventArgs e) {
-        GameController.Instance.DefeatEvent?.Invoke();
+        gameController.DefeatEvent?.Invoke();
     }
 
     private void HeartsHealthSystem_OnHealed(object sender, System.EventArgs e) {

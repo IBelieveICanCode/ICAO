@@ -4,11 +4,11 @@ namespace PathCreation.Follower
 {
     // Moves along a path at constant speed.
     // Depending on the end of path instruction, will either loop, reverse, or stop at the end of the path.
-    public class PathFollower : MonoBehaviour
+    public class PathFollower: MonoBehaviour 
     {
         Rigidbody2D rb;
         public PathCreator pathCreator;
-        public EndOfPathInstruction endOfPathInstruction;
+        public EndOfPathInstruction endOfPathInstruction = EndOfPathInstruction.Stop;
         float distanceTravelled;
 
         void Start() {

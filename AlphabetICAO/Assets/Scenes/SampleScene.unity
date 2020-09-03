@@ -591,6 +591,7 @@ GameObject:
   m_Component:
   - component: {fileID: 976390436}
   - component: {fileID: 976390437}
+  - component: {fileID: 976390438}
   m_Layer: 0
   m_Name: GameController
   m_TagString: Untagged
@@ -658,6 +659,24 @@ MonoBehaviour:
   DefeatEvent:
     m_PersistentCalls:
       m_Calls: []
+--- !u!114 &976390438
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 976390435}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0166d8ff8d905b048b2448179e1f5d11, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _components:
+  - {fileID: 976390437}
+  _identifier: 
+  _useSceneContext: 0
+  _context: {fileID: 0}
+  _bindType: 0
 --- !u!1 &1016949313
 GameObject:
   m_ObjectHideFlags: 0
@@ -1602,7 +1621,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 89715ad69b973a14899afa2c6730b30b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _scriptableObjectInstallers: []
+  _scriptableObjectInstallers:
+  - {fileID: 11400000, guid: 68b456714e0642640a36c31334a31ef5, type: 2}
   _monoInstallers:
   - {fileID: 1813793468}
   _installerPrefabs: []

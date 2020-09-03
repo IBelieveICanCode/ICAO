@@ -23,20 +23,20 @@ namespace FactorySpace
             _plane.SetPosition(spawnPos);
             _plane.PathFollower.pathCreator = path;
 
-            switch (planeType)
-            {
-                case (int)PlaneTypes.OneLetterPlane:
-                    _plane.WordsAmount = 1;
-                    break;
-                case (int)PlaneTypes.TwoLettersPlane:
-                    _plane.WordsAmount = 2;
-                    break;
-                case (int)PlaneTypes.ThreeLettersPlane:
-                    _plane.WordsAmount = 3;
-                    break;
-                default:
-                    return null;
-            }
+            //switch (planeType)
+            //{
+            //    case (int)PlaneTypes.OneLetterPlane:
+            //        _plane.WordsAmount = 1;
+            //        break;
+            //    case (int)PlaneTypes.TwoLettersPlane:
+            //        _plane.WordsAmount = 2;
+            //        break;
+            //    case (int)PlaneTypes.ThreeLettersPlane:
+            //        _plane.WordsAmount = 3;
+            //        break;
+            //    default:
+            //        return null;
+            //}
             return _plane;//.GetComponent<IPlaneCommunicator>();
         }
     }

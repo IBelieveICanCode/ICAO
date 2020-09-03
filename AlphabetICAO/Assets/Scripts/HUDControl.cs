@@ -4,6 +4,7 @@ using UnityEngine.UI;
 using UtilityScripts;
 using TMPro;
 using DG.Tweening;
+using Zenject;
 
 public class HUDControl : Singleton<HUDControl> {
 
@@ -12,13 +13,16 @@ public class HUDControl : Singleton<HUDControl> {
     [SerializeField] private TMP_Text roundCount;
     [SerializeField] private RectTransform setUpWordsPanel;
 
+    [Inject]
+    private GameController gameController;
+    
     void Awake()
     {
         inputPanel = gameObject.GetComponentInChildren<InputFieldWords>();
     }
     private void Start()
     {
-        GameController.Instance.ProgressEvent += UpdateRounds;
+        gameController.ProgressEvent += UpdateRounds;
     }
 
     public void Exit()
@@ -28,10 +32,10 @@ public class HUDControl : Singleton<HUDControl> {
 
     public void SubmitButton()
     {
-        if (inputPanel.CheckCorrectAnswers())
-            GameController.Instance.AnswerCorrectUpdatePath();
+        if (inputPanel.CheckIfAnswersCorrect())
+            gameController.AnswerCorrectUpdatePath();
         else
-            GameController.Instance.AnswerNotCorrect();
+            gameController.AnswerNotCorrect();
     }
 
     public void Defeat()
@@ -61,7 +65,6 @@ public class HUDControl : Singleton<HUDControl> {
 
     public void HideWordsPanel()
     {
-        print(setUpWordsPanel.rect.height);
         setUpWordsPanel.DOAnchorPos(new Vector2(0, -setUpWordsPanel.rect.height), 0.25f);
     }
     private void UpdateRounds(LevelProgress lvlProgress)

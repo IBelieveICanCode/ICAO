@@ -7,6 +7,7 @@ using UnityEngine.UI;
 using TMPro;
 using UnityEngine.EventSystems;
 using UtilityScripts;
+using Zenject;
 
 public class InputFieldWords : MonoBehaviour
 {
@@ -15,10 +16,14 @@ public class InputFieldWords : MonoBehaviour
 
     private List<TMP_InputField> createdInputFields = new List<TMP_InputField>();
 
+    [Inject]
+    GameController gameController;
+
+
     public void CreateAndSetInputFields()
     {
         ClearInputFields();
-        foreach (string word in GameController.Instance.ChosenWords.Values)
+        foreach (string word in gameController.ChosenWords.Values)
         {
             //GameObject _loadField = Resources.Load("Prefabs/InputText") as GameObject;
             TMP_InputField _inputField = Instantiate(inputTextPrefab);
@@ -56,9 +61,9 @@ public class InputFieldWords : MonoBehaviour
         createdInputFields.Clear();
     }
 
-    public bool CheckCorrectAnswers()
+    public bool CheckIfAnswersCorrect()
     {
-        string[] _allValues = GameController.Instance.ChosenWords.Values.ToArray();
+        string[] _allValues = gameController.ChosenWords.Values.ToArray();
         return !_allValues.Where((t, i) => !createdInputFields[i].text.ToLower().Equals(t.ToLower())).Any();
     }
 

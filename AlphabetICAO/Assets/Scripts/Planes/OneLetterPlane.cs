@@ -7,7 +7,7 @@ public class OneLetterPlane : Plane
 {
     protected override void Init()
     {
-        GameController.Instance.SetUpWords(1);
+        gameController.SetUpWords(1);
         ChooseLettersForText();        
     }
 }

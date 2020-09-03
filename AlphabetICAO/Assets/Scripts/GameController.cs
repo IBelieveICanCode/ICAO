@@ -5,12 +5,13 @@ using FactorySpace;
 using UnityEngine;
 using UnityEngine.Events;
 using FieldSettings;
+using Zenject;
 
 namespace Adminka
 {
     public delegate void LevelProgressHandler(LevelProgress progress);
 
-    public class GameController : Singleton<GameController>
+    public class GameController : MonoBehaviour
     {
         public LevelProgress LvlProgress { get; private set; }
         private int roundCount;
@@ -23,8 +24,11 @@ namespace Adminka
         private Field field;
         private Field Field => field;
 
-        private Factory planeFactory;
-        private IPlaneCommunicator plane;
+        //private Factory planeFactory;
+        //private IPlaneCommunicator plane;
+        private Plane plane;
+        [Inject]
+        private Plane.PlaneFactory planeFactory;
 
         [Header("Events")]
         public UnityEvent CorrectEvent;
@@ -36,7 +40,7 @@ namespace Adminka
         {
             LvlProgress = new LevelProgress {Rounds = 1};
             Field.CreateField();       
-            planeFactory = FactoryProducer.GetFactory(FactoryProductType.Planes);
+            //planeFactory = FactoryProducer.GetFactory(FactoryProductType.Planes);
             InitPlane();
 
             WrongEvent.AddListener(() => HUDControl.Instance.DiscardHealth());
@@ -53,8 +57,9 @@ namespace Adminka
         private void InitPlane()
         {
             Vector3 _planeSpawn = Field.PickRandomSpotToSpawn();
-            CreatePathForPlane(_planeSpawn, Field.Center, Field.StartingDestination);        
-            plane = planeFactory.GetProduct((int)LvlProgress.PlaneTypes, _planeSpawn, pathPlane.Path);
+            CreatePathForPlane(_planeSpawn, Field.Center, Field.StartingDestination);
+            //plane = planeFactory.GetProduct((int)LvlProgress.PlaneTypes, _planeSpawn, pathPlane.Path);
+            plane = planeFactory.Create(LvlProgress, _planeSpawn, pathPlane.Path);
             HUDControl.Instance.AskPlayer();
         }
 
@@ -95,7 +100,7 @@ namespace Adminka
         void SpawnConfetti()
         {
             GameObject _confetti = Resources.Load("Prefabs/Confetti") as GameObject;
-            foreach (Vector3 _pos in Field.ReturnCornersOfField(2))
+            foreach (Vector3 _pos in Field.GetCornersOfField(2))
             {
                 ParticleSystem _conf = Instantiate(_confetti).GetComponent<ParticleSystem>(); ;
                 _conf.transform.position = _pos;

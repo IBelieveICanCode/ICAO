@@ -4,6 +4,7 @@ using UniRx;
 using UniRx.Triggers;
 using UnityEngine;
 using UtilityScripts;
+using Zenject;
 
 namespace FieldSettings
 {
@@ -14,7 +15,8 @@ namespace FieldSettings
 
         public Vector3 Center { get; private set; }
 
-        private GameObject finish;
+        [Inject]
+        private FinishSpot.FinishSpotFactory finishFactory;
 
         private Bounds bounds;
 
@@ -30,9 +32,8 @@ namespace FieldSettings
         private readonly Vector3 offset = Vector3.down * 2;
         public Vector3 StartingDestination => Utility.RandomizePoint(finishPos + offset);
 
-        private void Awake()
-        {
-        }
+        [Inject]
+        private GameController gameController;
         public void CreateField()
         {
             var _halfHeight = Camera.main.orthographicSize;
@@ -48,10 +49,10 @@ namespace FieldSettings
             Center = GetComponentInChildren<MeshRenderer>().bounds.center;
             SetSidesOfMesh();
 
-            var _finishPrefab = Resources.Load("Prefabs/Finish") as GameObject;
+            var _finish = finishFactory.Create();
             finishPos = new Vector3(0f, -height / 2, 0.2f);
-            finish = Instantiate(_finishPrefab, finishPos, Quaternion.identity);
-            finish.transform.parent = this.transform;
+            _finish.gameObject.transform.position = finishPos;
+            _finish.transform.parent = this.transform;
 
             var _col = gameObject.AddComponent(typeof(BoxCollider2D)) as BoxCollider2D;
             if (_col != null)
@@ -63,7 +64,7 @@ namespace FieldSettings
 
             this.OnTriggerEnter2DAsObservable()
                 .Where(collision => collision.gameObject.GetComponent<IPlaneCommunicator>() != null)
-                .Subscribe(collision => GameController.Instance.WrongEvent?.Invoke());
+                .Subscribe(collision => gameController.WrongEvent?.Invoke());
         }
 
         private void SetSidesOfMesh()
@@ -99,7 +100,7 @@ namespace FieldSettings
             return _center;
         }
 
-        public IEnumerable<Vector3> ReturnCornersOfField(int amount)
+        public IEnumerable<Vector3> GetCornersOfField(int amount)
         {
             var _corners = new List<Vector3>();
             if (amount > cornersOfField.Count)

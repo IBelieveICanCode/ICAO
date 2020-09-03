@@ -1,18 +1,20 @@
 ﻿using Adminka;
+using PathCreation;
 using PathCreation.Follower;
 using TMPro;
 using UnityEngine;
+using Zenject;
 
     [RequireComponent(typeof(Rigidbody2D))]
     public class Plane : MonoBehaviour, IPlaneCommunicator
     {
-        public int WordsAmount;
+        private int wordsAmount;
+        public int WordsAmount => wordsAmount;
         [SerializeField]
         protected TMP_Text lettersText;
 
         [SerializeField]
         private PathFollower pathFollower;
-
         public PathFollower PathFollower => pathFollower;
 
         public Vector3 Position => transform.position;
@@ -21,22 +23,29 @@ using UnityEngine;
         protected float speed;
         public float Speed => speed;
 
+        [Inject]
+        protected GameController gameController;
+
         public Vector3 LetterPosition => transform.localPosition + (Vector3.up * 1.5f);
 
-        private void Awake()
+        [Inject]
+        public void Construct(LevelProgress level, Vector3 spawnPos, PathCreator path)
         {
-            Init();
+            speed = level.Speed;
+            transform.position = spawnPos;
+            pathFollower.pathCreator = path;
+            wordsAmount = (int)level.PlaneTypes;
         }
         private void Start()
         {
-            GameController.Instance.WrongEvent.AddListener(EndGame);
-            GameController.Instance.CorrectEvent.AddListener(EndGame);
-            speed = GameController.Instance.LvlProgress.Speed;
+            gameController.WrongEvent.AddListener(EndGame);
+            gameController.CorrectEvent.AddListener(EndGame);
+            Init();
         }
 
         protected virtual void Init()
         {
-            GameController.Instance.SetUpWords(WordsAmount);
+            gameController.SetUpWords(WordsAmount);
             ChooseLettersForText();     
         }
 
@@ -48,7 +57,7 @@ using UnityEngine;
         protected void ChooseLettersForText()
         {
             lettersText.text = null;
-            foreach (string _letter in GameController.Instance.ChosenWords.Keys)
+            foreach (string _letter in gameController.ChosenWords.Keys)
             {
                 lettersText.text += _letter + "  ";
             }
@@ -62,13 +71,18 @@ using UnityEngine;
         protected void EndGame()
         {   
             Destroy(gameObject);
-            GameController.Instance.WrongEvent.RemoveListener(() => EndGame());
-            GameController.Instance.CorrectEvent.RemoveListener(() => EndGame());
+            gameController.WrongEvent.RemoveListener(() => EndGame());
+            gameController.CorrectEvent.RemoveListener(() => EndGame());
         }
 
-        void IPlaneCommunicator.Accelerate()
+        public void Accelerate()
         {
             speed = 5f;
         }
+
+    public class PlaneFactory : PlaceholderFactory<LevelProgress, Vector3, PathCreator, Plane>
+    {
     }
+
+}
 
