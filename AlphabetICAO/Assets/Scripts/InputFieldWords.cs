@@ -16,23 +16,16 @@ public class InputFieldWords : MonoBehaviour
 
     private List<TMP_InputField> createdInputFields = new List<TMP_InputField>();
 
-    [Inject]
-    GameController gameController;
-
 
     public void CreateAndSetInputFields()
     {
         ClearInputFields();
-        foreach (string word in gameController.ChosenWords.Values)
+        foreach (string word in GameController.ChosenWords.Values)
         {
             //GameObject _loadField = Resources.Load("Prefabs/InputText") as GameObject;
             TMP_InputField _inputField = Instantiate(inputTextPrefab);
             _inputField.transform.SetParent(this.transform);
             _inputField.text = Utility.ReplaceStringWithUnderlines(word);
-            //EventSystem.current.SetSelectedGameObject(_inputField.gameObject);
-            //_inputField.onSelect.AddListener((x) => _inputField.caretPosition = 1);
-            //inputField.OnSelect((x) => _inputField.caretPosition = 1);
-            //_inputField.onValueChanged.AddListener(delegate { ReplaceBackSlashes(_inputField); });
             _inputField.onValidateInput += delegate(string text, int index, char addedChar)
             {
                 ReplaceBackSlashes(_inputField);
@@ -40,11 +33,7 @@ public class InputFieldWords : MonoBehaviour
             };
             createdInputFields.Add(_inputField);
         }
-
-        //EventSystem.current.SetSelectedGameObject(createdInputFields[0].gameObject,); 
-        //createdInputFields[0].onSelect.AddListener((x) => createdInputFields[0].caretPosition = 1);
         createdInputFields[0].Select();
-        //createdInputFields[0].caretPosition = 1;
     }
 
     private void ReplaceBackSlashes(TMP_InputField inputField)
@@ -63,7 +52,7 @@ public class InputFieldWords : MonoBehaviour
 
     public bool CheckIfAnswersCorrect()
     {
-        string[] _allValues = gameController.ChosenWords.Values.ToArray();
+        string[] _allValues = GameController.ChosenWords.Values.ToArray();
         return !_allValues.Where((t, i) => !createdInputFields[i].text.ToLower().Equals(t.ToLower())).Any();
     }
 

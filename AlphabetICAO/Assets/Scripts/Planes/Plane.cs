@@ -23,6 +23,9 @@ using Zenject;
         protected float speed;
         public float Speed => speed;
 
+        [SerializeField]
+        private float maxSpeed = 5;
+
         [Inject]
         protected GameController gameController;
 
@@ -34,7 +37,7 @@ using Zenject;
             speed = level.Speed;
             transform.position = spawnPos;
             pathFollower.pathCreator = path;
-            wordsAmount = (int)level.PlaneTypes;
+            wordsAmount = (int)level.PlaneTypes + 1;
         }
         private void Start()
         {
@@ -43,7 +46,7 @@ using Zenject;
             Init();
         }
 
-        protected virtual void Init()
+        protected void Init()
         {
             gameController.SetUpWords(WordsAmount);
             ChooseLettersForText();     
@@ -57,17 +60,10 @@ using Zenject;
         protected void ChooseLettersForText()
         {
             lettersText.text = null;
-            foreach (string _letter in gameController.ChosenWords.Keys)
-            {
-                lettersText.text += _letter + "  ";
-            }
+            foreach (string _letter in GameController.ChosenWords.Keys)
+                lettersText.text += _letter + "  ";          
         }
 
-        public void SetPosition(Vector3 pos)
-        {
-            transform.position = pos;
-        }
-        
         protected void EndGame()
         {   
             Destroy(gameObject);
@@ -77,7 +73,7 @@ using Zenject;
 
         public void Accelerate()
         {
-            speed = 5f;
+            speed = maxSpeed;
         }
 
     public class PlaneFactory : PlaceholderFactory<LevelProgress, Vector3, PathCreator, Plane>

@@ -392,10 +392,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 93b25961090703441af553e7bf9973fe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  WordsAmount: 1
   lettersText: {fileID: 4574362393514211911}
   pathFollower: {fileID: -2904210182651040873}
   speed: 1
+  maxSpeed: 5
 --- !u!1 &3267512047022057758
 GameObject:
   m_ObjectHideFlags: 0

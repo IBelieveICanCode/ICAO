@@ -20,7 +20,7 @@ namespace FactorySpace
         {
             PlaneSO _planeSpawned =  Resources.Load("ScriptableObject/Plane") as PlaneSO;
             Plane _plane = Object.Instantiate(_planeSpawned.Plane);
-            _plane.SetPosition(spawnPos);
+            _plane.transform.position =spawnPos;
             _plane.PathFollower.pathCreator = path;
 
             //switch (planeType)

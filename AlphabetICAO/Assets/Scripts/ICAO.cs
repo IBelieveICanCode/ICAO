@@ -38,12 +38,6 @@ public class ICAO {
 
     public string this[string letter] => Alphabet[letter.ToUpper()] != null ? Alphabet[letter] : null;
 
-    //foreach (KeyValuePair<string, string> pair in Alphabet)
-    //{
-    //    if (letter.ToUpper().Equals(pair.Key))
-    //        return pair.Value;
-    //}
-    //return null;
     public static Dictionary<string, string> ReturnRandomWordsFromAlphabet(int amountOfWords)
     {
         Dictionary<string, string> _returningWords = new Dictionary<string,string>();

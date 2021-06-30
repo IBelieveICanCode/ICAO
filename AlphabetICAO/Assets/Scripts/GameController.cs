@@ -14,10 +14,7 @@ namespace Adminka
     public class GameController : MonoBehaviour
     {
         public LevelProgress LvlProgress { get; private set; }
-        private int roundCount;
-
-        private ICAO alphabetIcao;
-        public Dictionary<string, string> ChosenWords { get; private set; }
+        public static Dictionary<string, string> ChosenWords { get; private set; }
         [SerializeField] private PathPlane pathPlane;
 
         [SerializeField]
@@ -28,7 +25,7 @@ namespace Adminka
         //private IPlaneCommunicator plane;
         private Plane plane;
         [Inject]
-        private Plane.PlaneFactory planeFactory;
+        private readonly Plane.PlaneFactory planeFactory;
 
         [Header("Events")]
         public UnityEvent CorrectEvent;
@@ -38,6 +35,7 @@ namespace Adminka
 
         private void Start()
         {
+            ChosenWords = new Dictionary<string, string>();
             LvlProgress = new LevelProgress {Rounds = 1};
             Field.CreateField();       
             //planeFactory = FactoryProducer.GetFactory(FactoryProductType.Planes);
@@ -47,7 +45,7 @@ namespace Adminka
             CorrectEvent.AddListener(() => HUDControl.Instance.AddHealth());
             CorrectEvent.AddListener(() =>
             {
-                if (ProgressEvent != null) ProgressEvent(LvlProgress);
+                ProgressEvent?.Invoke(LvlProgress);
             });
             ProgressEvent += ProgressLevel;
             DefeatEvent.AddListener(() => HUDControl.Instance.Defeat());
@@ -59,8 +57,8 @@ namespace Adminka
             Vector3 _planeSpawn = Field.PickRandomSpotToSpawn();
             CreatePathForPlane(_planeSpawn, Field.Center, Field.StartingDestination);
             //plane = planeFactory.GetProduct((int)LvlProgress.PlaneTypes, _planeSpawn, pathPlane.Path);
-            plane = planeFactory.Create(LvlProgress, _planeSpawn, pathPlane.Path);
-            HUDControl.Instance.AskPlayer();
+            plane = planeFactory.Create(LvlProgress, _planeSpawn, pathPlane.Path);            
+
         }
 
         private void CreatePathForPlane(Vector3 startingPoint, Vector3 secondPoint, Vector3 endPoint)
@@ -79,6 +77,7 @@ namespace Adminka
             //HUDControl.Instance.ChangeWordsPanel(new Vector2(0, -80), 0f);
             ChosenWords = ICAO.ReturnRandomWordsFromAlphabet(amount);
             HUDControl.Instance.ShowWordsPanel();
+            HUDControl.Instance.AskPlayer();
         }
 
         private void ProgressLevel(LevelProgress lvlProgress)

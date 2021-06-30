@@ -197,10 +197,10 @@ RectTransform:
   m_Father: {fileID: 1466579247}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.68975, y: 0}
-  m_AnchorMax: {x: 1, y: 0.257}
-  m_AnchoredPosition: {x: 0.000030517578, y: -205.6}
-  m_SizeDelta: {x: 0, y: 0}
+  m_AnchorMin: {x: 1, y: 0}
+  m_AnchorMax: {x: 1, y: 0}
+  m_AnchoredPosition: {x: -71.64404, y: -85.984924}
+  m_SizeDelta: {x: 143.28806, y: 171.96982}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &383567500
 CanvasRenderer:
@@ -529,8 +529,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 1}
   m_AnchorMax: {x: 0.5, y: 1}
-  m_AnchoredPosition: {x: -0.000017166, y: -85.627}
-  m_SizeDelta: {x: 147.91998, y: 171.25427}
+  m_AnchoredPosition: {x: 1.158, y: -65.811}
+  m_SizeDelta: {x: 145.604, y: 131.62546}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &633617368
 MonoBehaviour:
@@ -1001,7 +1001,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   fadeImage: {fileID: 1642186303}
   roundCount: {fileID: 1597621472}
-  setUpWordsPanel: {fileID: 383567499}
+  wordsPanel: {fileID: 383567499}
 --- !u!1 &1530261738
 GameObject:
   m_ObjectHideFlags: 0
@@ -1287,8 +1287,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0}
   m_AnchorMax: {x: 0.5, y: 0}
-  m_AnchoredPosition: {x: -0.000017166, y: 20.172882}
-  m_SizeDelta: {x: 147.91998, y: 40.345764}
+  m_AnchoredPosition: {x: 0.000002861023, y: 20.172882}
+  m_SizeDelta: {x: 152.33276, y: 40.345764}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1632886532
 MonoBehaviour:

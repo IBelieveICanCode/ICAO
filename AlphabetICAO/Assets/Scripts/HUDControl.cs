@@ -1,9 +1,9 @@
 ﻿using Adminka;
+using DG.Tweening;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 using UtilityScripts;
-using TMPro;
-using DG.Tweening;
 using Zenject;
 
 public class HUDControl : Singleton<HUDControl> {
@@ -11,10 +11,10 @@ public class HUDControl : Singleton<HUDControl> {
     [SerializeField] private Image fadeImage;
     private InputFieldWords inputPanel;
     [SerializeField] private TMP_Text roundCount;
-    [SerializeField] private RectTransform setUpWordsPanel;
+    [SerializeField] private RectTransform wordsPanel;
 
     [Inject]
-    private GameController gameController;
+    private readonly GameController gameController;
     
     void Awake()
     {
@@ -43,7 +43,6 @@ public class HUDControl : Singleton<HUDControl> {
         fadeImage.gameObject.SetActive(true);
         StartCoroutine(Utility.Fade(3, fadeImage));
     }
-    //answerInput.text.ToLower().Equals(ICAO.alphabet[letter].ToLower())
     public void AskPlayer()
     {
         inputPanel.CreateAndSetInputFields();
@@ -60,12 +59,12 @@ public class HUDControl : Singleton<HUDControl> {
 
     public void ShowWordsPanel()
     {
-        setUpWordsPanel.DOAnchorPos(Vector2.zero, 0.25f);
+        wordsPanel.DOAnchorPosY(-wordsPanel.rect.y, 0.25f);
     }
 
     public void HideWordsPanel()
     {
-        setUpWordsPanel.DOAnchorPos(new Vector2(0, -setUpWordsPanel.rect.height), 0.25f);
+        wordsPanel.DOAnchorPosY(wordsPanel.rect.y, 0.25f);
     }
     private void UpdateRounds(LevelProgress lvlProgress)
     {
